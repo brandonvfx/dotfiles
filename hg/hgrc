@@ -1,0 +1,3 @@
+[ui]
+username = {{FULL_NAME}} <{{EMAIL}}>
+ignore=~/.hgignore
