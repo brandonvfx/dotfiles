@@ -3,6 +3,8 @@ import os
 
 from mow import task
 
+ROOT = os.path.dirname(__file__)
+
 def mklink(src, dest):
     if os.path.exists(dest):
         print "{0}: Already exists".format(dest)
@@ -18,14 +20,14 @@ def mklink(src, dest):
 @task('install-emacs')
 def emacs():
     """Install Emacs dot files"""
-    emacs_dir = os.path.abspath('emacs')
+    emacs_dir = os.path.join(ROOT, 'emacs')
     emacs_link = os.path.expanduser('~/.emacs.d')
     mklink(emacs_dir, emacs_link)
 
 @task('install-bash')
 def bash():
     """Install Bash dot files"""
-    bash_dir = os.path.abspath('bash')
+    bash_dir =  os.path.join(ROOT, 'bash')
     bashp_file = os.path.join(bash_dir, 'bash_profile')
     bashp_link = os.path.expanduser('~/.bash_profile')
     mklink(bashp_file, bashp_link)
@@ -37,7 +39,7 @@ def bash():
 @task('install-tcsh')
 def tcsh():
     """Install Tcsh dot files"""
-    tcsh_dir = os.path.abspath('tcsh')
+    tcsh_dir =  os.path.join(ROOT, 'tcsh')
     tcsh_file = os.path.join(tcsh_dir, 'tcshrc')
     tcsh_link = os.path.expanduser('~/.tcshrc')
     mklink(tcsh_file, tcsh_link)
@@ -45,7 +47,7 @@ def tcsh():
 @task('install-hg')
 def hg():
     """Install Mercurial dot files"""
-    hg_dir = os.path.abspath('hg')
+    hg_dir =  os.path.join(ROOT, 'hg')
     hgrc_file = os.path.join(hg_dir, 'hgrc')
     hgrc_link = os.path.expanduser('~/.hgrc')
     mklink(hgrc_file, hgrc_link)
@@ -57,7 +59,7 @@ def hg():
 @task('install-git')
 def git():
     """Install git dot files"""
-    git_dir = os.path.abspath('git')
+    git_dir =  os.path.join(ROOT, 'git')
     gitconfig_file = os.path.join(git_dir, 'gitconfig')
     gitconfig_link = os.path.expanduser('~/.gitconfig')
     mklink(gitconfig_file, gitconfig_link)
@@ -69,7 +71,7 @@ def git():
 @task('install-ipython')
 def ipython():
     """Install IPython dot files"""
-    ipython_dir = os.path.abspath('ipython')
+    ipython_dir =  os.path.join(ROOT, 'ipython')
     ipython_link = os.path.expanduser('~/.ipython')
     mklink(ipython_dir, ipython_link)
 
