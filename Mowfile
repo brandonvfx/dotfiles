@@ -28,11 +28,11 @@ def emacs():
 def bash():
     """Install Bash dot files"""
     bash_dir =  os.path.join(ROOT, 'bash')
-    bashp_file = os.path.join(bash_dir, 'bash_profile')
+    bashp_file = os.path.join(bash_dir, 'bash_profile.sh')
     bashp_link = os.path.expanduser('~/.bash_profile')
     mklink(bashp_file, bashp_link)
 
-    bashrc_file = os.path.join(bash_dir, 'bashrc')
+    bashrc_file = os.path.join(bash_dir, 'bashrc.sh')
     bashrc_link = os.path.expanduser('~/.bashrc')
     mklink(bashrc_file, bashrc_link)
 
