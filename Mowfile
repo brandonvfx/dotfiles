@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import glob
 
 from mow import task
 
@@ -11,7 +12,7 @@ def mklink(src, dest):
     else:
         try:
             os.symlink(src, dest)
-        except OSError:
+        except OSError, e:
             print "{0}: Already exists".format(dest)
             return
         print "Created link {0}".format(dest)
@@ -53,7 +54,7 @@ def hg():
     mklink(hgrc_file, hgrc_link)
 
     hgignore_file = os.path.join(hg_dir, 'hgignore')
-    hgignore_link = os.path.expanduser('~/.hgignore')    
+    hgignore_link = os.path.expanduser('~/.hgignore')
     mklink(hgignore_file, hgignore_link)
 
 @task('install-git')
@@ -75,6 +76,18 @@ def ipython():
     ipython_link = os.path.expanduser('~/.ipython')
     mklink(ipython_dir, ipython_link)
 
+@task('install-sublime-text-2')
+def sublime(sublime_settings_dir='~/Library/Application Support/Sublime Text 2/Packages/User'):
+    """Install Sublime settings"""
+    install_location = os.path.expanduser(sublime_settings_dir)
+    sublime_settings = os.path.join(ROOT, 'sublime_text_2', 'settings')
+    for filepath in glob.glob(os.path.join(sublime_settings, '*.sublime-*')):
+        filename = os.path.basename(filepath)
+        file_link = os.path.join(install_location, filename)
+        if os.path.exists(file_link):
+            os.unlink(file_link)
+        mklink(filepath, file_link)
+
 @task('install-all')
 def all():
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
@@ -84,6 +97,7 @@ def all():
     hg()
     git()
     ipython()
+    sublime()
 
 if __name__ == '__main__':
     all()
