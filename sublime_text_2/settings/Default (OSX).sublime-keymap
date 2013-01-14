@@ -1,0 +1,6 @@
+[
+    { "keys": ["ctrl+x"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+    { "keys": ["ctrl+x", "ctrl+s"], "command": "save" },
+    { "keys": ["ctrl+x", "ctrl+w"], "command": "prompt_save_as" },
+    { "keys": ["ctrl+x", "k"], "command": "close" }
+]

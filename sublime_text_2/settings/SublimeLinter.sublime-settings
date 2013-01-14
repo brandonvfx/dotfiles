@@ -1,0 +1,14 @@
+{
+    "sublimelinter_gutter_marks": true,
+    "sublimelinter_fill_outlines": false,
+    "sublimelinter_popup_errors_on_save": true//,
+    // "pep8_ignore":
+    // [
+    //     "E501",
+    //     "W291",
+    //     "W293",
+    //     "E302",
+    //     "E201",
+    //     "W391"
+    // ]
+}

@@ -1,93 +1,113 @@
 #!/usr/bin/python
 import os
+import glob
+import shutil
 
 from mow import task
 
 ROOT = os.path.dirname(__file__)
 
-def mklink(src, dest):
-    if os.path.exists(dest):
+def mklink(src, dest, force=False):
+    if os.path.exists(dest) and not force:
         print "{0}: Already exists".format(dest)
-    else:
-        try:
-            os.symlink(src, dest)
-        except OSError:
-            print "{0}: Already exists".format(dest)
-            return
-        print "Created link {0}".format(dest)
+        return
+    elif os.path.exists(dest) and force:
+        print "Removing {0}".format(dest)
+        if os.path.isdir(dest):
+            shutil.rmtree(dest)
+        else:
+            os.unlink(dest)   
+    
+    try:
+        os.symlink(src, dest)
+    except OSError, e:
+        print "{0}: Already exists".format(dest)
+        return
+    print "Created link {0}".format(dest)
 
 
 @task('install-emacs')
-def emacs():
+def emacs(force=False):
     """Install Emacs dot files"""
     emacs_dir = os.path.join(ROOT, 'emacs')
     emacs_link = os.path.expanduser('~/.emacs.d')
-    mklink(emacs_dir, emacs_link)
+    mklink(emacs_dir, emacs_link, force)
 
 @task('install-bash')
-def bash():
+def bash(force=False):
     """Install Bash dot files"""
     bash_dir = os.path.join(ROOT, 'bash')
     bashp_file = os.path.join(bash_dir, 'bash_profile.sh')
     bashp_link = os.path.expanduser('~/.bash_profile')
-    mklink(bashp_file, bashp_link)
+    mklink(bashp_file, bashp_link, force)
 
     bashrc_file = os.path.join(bash_dir, 'bashrc.sh')
     bashrc_link = os.path.expanduser('~/.bashrc')
-    mklink(bashrc_file, bashrc_link)
+    mklink(bashrc_file, bashrc_link, force)
 
     bashrc_file = os.path.join(bash_dir, 'inputrc.sh')
     bashrc_link = os.path.expanduser('~/.inputrc')
     mklink(bashrc_file, bashrc_link)
 
 @task('install-tcsh')
-def tcsh():
+def tcsh(force=False):
     """Install Tcsh dot files"""
     tcsh_dir = os.path.join(ROOT, 'tcsh')
     tcsh_file = os.path.join(tcsh_dir, 'tcshrc')
     tcsh_link = os.path.expanduser('~/.tcshrc')
-    mklink(tcsh_file, tcsh_link)
+    mklink(tcsh_file, tcsh_link, force)
 
 @task('install-hg')
-def hg():
+def hg(force=False):
     """Install Mercurial dot files"""
     hg_dir = os.path.join(ROOT, 'hg')
     hgrc_file = os.path.join(hg_dir, 'hgrc')
     hgrc_link = os.path.expanduser('~/.hgrc')
-    mklink(hgrc_file, hgrc_link)
+    mklink(hgrc_file, hgrc_link, force)
 
     hgignore_file = os.path.join(hg_dir, 'hgignore')
-    hgignore_link = os.path.expanduser('~/.hgignore')    
-    mklink(hgignore_file, hgignore_link)
+    hgignore_link = os.path.expanduser('~/.hgignore')
+    mklink(hgignore_file, hgignore_link, force)
 
 @task('install-git')
-def git():
+def git(force=False):
     """Install git dot files"""
     git_dir = os.path.join(ROOT, 'git')
     gitconfig_file = os.path.join(git_dir, 'gitconfig')
     gitconfig_link = os.path.expanduser('~/.gitconfig')
-    mklink(gitconfig_file, gitconfig_link)
+    mklink(gitconfig_file, gitconfig_link, force)
 
     gitignore_file = os.path.join(git_dir, 'gitignore')
     gitignore_link = os.path.expanduser('~/.gitignore')
-    mklink(gitignore_file, gitignore_link)
+    mklink(gitignore_file, gitignore_link, force)
 
 @task('install-ipython')
-def ipython():
+def ipython(force=False):
     """Install IPython dot files"""
     ipython_dir = os.path.join(ROOT, 'ipython')
     ipython_link = os.path.expanduser('~/.ipython')
-    mklink(ipython_dir, ipython_link)
+    mklink(ipython_dir, ipython_link, force)
+
+@task('install-sublime-text-2')
+def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sublime Text 2/Packages/User'):
+    """Install Sublime settings"""
+    install_location = os.path.expanduser(sublime_settings_dir)
+    sublime_settings = os.path.join(ROOT, 'sublime_text_2', 'settings')
+    for filepath in glob.glob(os.path.join(sublime_settings, '*.sublime-*')):
+        filename = os.path.basename(filepath)
+        file_link = os.path.join(install_location, filename)
+        mklink(filepath, file_link, force)
 
 @task('install-all')
-def all():
+def all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
-    emacs()
-    bash()
-    tcsh()
-    hg()
-    git()
-    ipython()
+    emacs(force)
+    bash(force)
+    tcsh(force)
+    hg(force)
+    git(force)
+    ipython(force)
+    sublime(force)
 
 if __name__ == '__main__':
     all()
