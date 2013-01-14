@@ -27,7 +27,7 @@ def emacs():
 @task('install-bash')
 def bash():
     """Install Bash dot files"""
-    bash_dir =  os.path.join(ROOT, 'bash')
+    bash_dir = os.path.join(ROOT, 'bash')
     bashp_file = os.path.join(bash_dir, 'bash_profile.sh')
     bashp_link = os.path.expanduser('~/.bash_profile')
     mklink(bashp_file, bashp_link)
@@ -36,10 +36,14 @@ def bash():
     bashrc_link = os.path.expanduser('~/.bashrc')
     mklink(bashrc_file, bashrc_link)
 
+    bashrc_file = os.path.join(bash_dir, 'inputrc.sh')
+    bashrc_link = os.path.expanduser('~/.inputrc')
+    mklink(bashrc_file, bashrc_link)
+
 @task('install-tcsh')
 def tcsh():
     """Install Tcsh dot files"""
-    tcsh_dir =  os.path.join(ROOT, 'tcsh')
+    tcsh_dir = os.path.join(ROOT, 'tcsh')
     tcsh_file = os.path.join(tcsh_dir, 'tcshrc')
     tcsh_link = os.path.expanduser('~/.tcshrc')
     mklink(tcsh_file, tcsh_link)
@@ -47,7 +51,7 @@ def tcsh():
 @task('install-hg')
 def hg():
     """Install Mercurial dot files"""
-    hg_dir =  os.path.join(ROOT, 'hg')
+    hg_dir = os.path.join(ROOT, 'hg')
     hgrc_file = os.path.join(hg_dir, 'hgrc')
     hgrc_link = os.path.expanduser('~/.hgrc')
     mklink(hgrc_file, hgrc_link)
@@ -59,7 +63,7 @@ def hg():
 @task('install-git')
 def git():
     """Install git dot files"""
-    git_dir =  os.path.join(ROOT, 'git')
+    git_dir = os.path.join(ROOT, 'git')
     gitconfig_file = os.path.join(git_dir, 'gitconfig')
     gitconfig_link = os.path.expanduser('~/.gitconfig')
     mklink(gitconfig_file, gitconfig_link)
@@ -71,7 +75,7 @@ def git():
 @task('install-ipython')
 def ipython():
     """Install IPython dot files"""
-    ipython_dir =  os.path.join(ROOT, 'ipython')
+    ipython_dir = os.path.join(ROOT, 'ipython')
     ipython_link = os.path.expanduser('~/.ipython')
     mklink(ipython_dir, ipython_link)
 
