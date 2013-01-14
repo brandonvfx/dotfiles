@@ -47,7 +47,7 @@ def bash(force=False):
 
     bashrc_file = os.path.join(bash_dir, 'inputrc.sh')
     bashrc_link = os.path.expanduser('~/.inputrc')
-    mklink(bashrc_file, bashrc_link)
+    mklink(bashrc_file, bashrc_link, force)
 
 @task('install-tcsh')
 def tcsh(force=False):
