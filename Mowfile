@@ -13,7 +13,9 @@ def mklink(src, dest, force=False):
         return
     elif os.path.exists(dest) and force:
         print "Removing {0}".format(dest)
-        if os.path.isdir(dest):
+        if os.path.islink(dest):
+            os.unlink(dest)
+        elif os.path.isdir(dest):
             shutil.rmtree(dest)
         else:
             os.unlink(dest)   
@@ -24,6 +26,27 @@ def mklink(src, dest, force=False):
         print "{0}: Already exists".format(dest)
         return
     print "Created link {0}".format(dest)
+ 
+    
+def cp(src, dest, force=False):
+    if os.path.exists(dest) and not force:
+        print "{0}: Already exists".format(dest)
+        return
+    elif os.path.exists(dest) and force:
+        print "Removing {0}".format(dest)
+        if os.path.islink(dest):
+            os.unlink(dest)
+        elif os.path.isdir(dest):
+            shutil.rmtree(dest)
+        else:
+            os.unlink(dest)   
+    
+    try:
+        shutil.copy(src, dest)
+    except OSError, e:
+        print "{0}: Already exists".format(dest)
+        return
+    print "File Copied {0}".format(dest)
 
 
 @task('install-emacs')
@@ -32,6 +55,7 @@ def emacs(force=False):
     emacs_dir = os.path.join(ROOT, 'emacs')
     emacs_link = os.path.expanduser('~/.emacs.d')
     mklink(emacs_dir, emacs_link, force)
+
 
 @task('install-bash')
 def bash(force=False):
@@ -49,6 +73,16 @@ def bash(force=False):
     bashrc_link = os.path.expanduser('~/.inputrc')
     mklink(bashrc_file, bashrc_link, force)
 
+    
+@task('install-fonts')
+def fonts(force=False):
+    font_install_location = os.path.expanduser('~/Library/Fonts')
+    for filepath in glob.glob(os.path.join(ROOT, 'ubuntu_mono_powerline', '*.otf')):
+        filename = os.path.basename(filepath)
+        file_dest = os.path.join(font_install_location, filename)
+        cp(filepath, file_dest, force)
+
+
 @task('install-tcsh')
 def tcsh(force=False):
     """Install Tcsh dot files"""
@@ -56,6 +90,7 @@ def tcsh(force=False):
     tcsh_file = os.path.join(tcsh_dir, 'tcshrc')
     tcsh_link = os.path.expanduser('~/.tcshrc')
     mklink(tcsh_file, tcsh_link, force)
+
 
 @task('install-hg')
 def hg(force=False):
@@ -69,6 +104,7 @@ def hg(force=False):
     hgignore_link = os.path.expanduser('~/.hgignore')
     mklink(hgignore_file, hgignore_link, force)
 
+
 @task('install-git')
 def git(force=False):
     """Install git dot files"""
@@ -81,12 +117,21 @@ def git(force=False):
     gitignore_link = os.path.expanduser('~/.gitignore')
     mklink(gitignore_file, gitignore_link, force)
 
+
 @task('install-ipython')
 def ipython(force=False):
     """Install IPython dot files"""
     ipython_dir = os.path.join(ROOT, 'ipython')
     ipython_link = os.path.expanduser('~/.ipython')
     mklink(ipython_dir, ipython_link, force)
+
+
+@task('install-iterm')
+def iterm(force=False):
+    iterm_file = os.path.join(ROOT, 'iterm', 'com.googlecode.iterm2.plist')
+    iterm_link = os.path.expanduser('~/Library/Preferences/com.googlecode.iterm2.plist')
+    mklink(iterm_file, iterm_link, force)
+
 
 @task('install-sublime-text-2')
 def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sublime Text 2/Packages/User'):
@@ -98,6 +143,7 @@ def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sub
         file_link = os.path.join(install_location, filename)
         mklink(filepath, file_link, force)
 
+
 @task('install-all')
 def all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
@@ -108,6 +154,7 @@ def all(force=False):
     git(force)
     ipython(force)
     sublime(force)
+    fonts(force )
 
 if __name__ == '__main__':
     all()

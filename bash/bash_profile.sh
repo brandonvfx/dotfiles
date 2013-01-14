@@ -27,3 +27,9 @@ else
       . /etc/bash_completion
     fi
 fi
+
+function _update_ps1() {
+   export PS1="$(~/.dotfiles/powerline_bash/powerline-bash.py $?)"
+}
+
+export PROMPT_COMMAND="_update_ps1"
