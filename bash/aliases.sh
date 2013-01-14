@@ -13,17 +13,18 @@ alias llt='ls -alFrth'
 alias grep="grep --color=auto"
 
 # editors
-function emacs()
+function e()
 { 
     if [ "$OS" == "Darwin" ] ; then
-        #command open -a /Applications/Emacs.app "$@"
-        command emacs -nw "$@"
+        command open -a /Applications/Emacs.app "$@" --args "--debug-init --nw"
+        #command emacs -nw "$@"
+        #command /Applications/Emacs.app/Contents/MacOS/Emacs "$@"
     else
         command emacs "$@" &
     fi
 }
 
-alias e=mate
+#alias e=emacs
 alias m=mate
 
 alias ..='cd ..'

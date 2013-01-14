@@ -2,7 +2,7 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export PS1="\u@\h:\W\> "
 
-export PATH="$HOME/bin:/usr/local/sbin:/opt/mongo/bin:/usr/local/pgsql/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/opt/mongo/bin:$PATH"
 
 export OS=`uname`
 
