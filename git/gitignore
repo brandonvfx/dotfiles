@@ -1,4 +1,7 @@
 *.pyc
 *~
 #*#
+.DS_Store
 mowfilec
+*.sqlite
+*.db
