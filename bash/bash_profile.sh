@@ -29,7 +29,7 @@ else
 fi
 
 function _update_ps1() {
-   export PS1="$(~/.dotfiles/powerline_bash/powerline-bash.py $?)"
+   export PS1="$(~/.dotfiles/powerline_shell/powerline-shell.py $?)"
 }
 
 export PROMPT_COMMAND="_update_ps1"
