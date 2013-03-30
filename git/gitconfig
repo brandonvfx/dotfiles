@@ -1,8 +1,8 @@
 [user]
-	name = {{FULL_NAME}}
-	email = {{EMAIL}}
+	name = Brandon Ashworth
+	email = brandon@brandonashworth.com
 [github]
-	user = {{GITHUB_USER}}
+	user = brandonvfx
 
 [core]
 	editor = emacs

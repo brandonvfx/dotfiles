@@ -1,2 +1,8 @@
 mowfilec
 *.sqlite
+*~
+ipython/profile_default/db*
+ipython/profile_default/log*
+ipython/profile_default/pid*
+ipython/profile_default/security*
+emacs/ede-projects.el

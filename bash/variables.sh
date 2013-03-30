@@ -16,3 +16,5 @@ export SWDEVL_HOME=${HOME}/swdevl
     
 export WORKON_HOME="$HOME/.virtualenvs"
 export PROJECT_HOME="$HOME/swdevl/projects"
+
+export PIP_DOWNLOAD_CACHE="$HOME/.pip_cache"

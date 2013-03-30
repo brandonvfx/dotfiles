@@ -1,3 +1,3 @@
 [ui]
-username = {{FULL_NAME}} <{{EMAIL}}>
+username = Brandon Ashworth <brandon@brandonashworth.com>
 ignore=~/.hgignore

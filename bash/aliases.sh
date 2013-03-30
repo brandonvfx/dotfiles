@@ -10,7 +10,7 @@ alias ll='ls -alFh'
 alias llt='ls -alFrth'
 
 # grep
-alias grep="grep --color=auto"
+alias grep='grep --color=auto '
 
 # editors
 function e()
