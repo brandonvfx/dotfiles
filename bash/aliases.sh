@@ -59,3 +59,8 @@ hgrep() {
         echo "!! Need name to grep for"
     fi 
 }
+
+if [ -x /usr/local/bin/hub ]
+then
+    alias git=hub
+fi
