@@ -10,11 +10,8 @@
 	[
 		"subpixel_antialias"
 	],
-	"font_size": 15.0,
+	"font_size": 17.0,
 	"highlight_line": true,
-	"ignored_packages":
-	[
-	],
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true
