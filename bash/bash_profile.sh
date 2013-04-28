@@ -1,6 +1,7 @@
 # Default Files.
 . ${HOME}/.dotfiles/bash/settings.sh
 . ${HOME}/.dotfiles/bash/variables.sh
+. ${HOME}/.dotfiles/bash/history.sh
 . ${HOME}/.dotfiles/bash/aliases.sh
 . ${HOME}/.dotfiles/bash/keybind.sh
 

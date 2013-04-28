@@ -1,6 +1,7 @@
 [user]
 	name = Brandon Ashworth
 	email = brandon@brandonashworth.com
+
 [github]
 	user = brandonvfx
 
@@ -18,6 +19,7 @@
 [merge]
 	keepBackup = false;
 	tool = p4merge
+
 [mergetool "p4merge"]
  	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 	keepTemporaries = false
