@@ -73,10 +73,19 @@ def bash(force=False):
     bashrc_link = os.path.expanduser('~/.inputrc')
     mklink(bashrc_file, bashrc_link, force)
 
-    
+@task('install-keybindings')
+def xmodmap(force=False):
+    xmodmap_file = os.path.join(ROOT, 'xmodmap')
+    xmodmap_link = os.path.expanduser('~/.Xmodmap')
+    mklink(xmodmap_file, xmodmap_link, force)
+
 @task('install-fonts')
-def fonts(force=False):
-    font_install_location = os.path.expanduser('~/Library/Fonts')
+def fonts(font_dir='~/Library/Fonts', force=False):
+    font_install_location = os.path.expanduser(font_dir)
+    try:
+        os.makedirs(font_dir)
+    except OSError:
+        pass
     for filepath in glob.glob(os.path.join(ROOT, 'ubuntu_mono_powerline', '*.otf')):
         filename = os.path.basename(filepath)
         file_dest = os.path.join(font_install_location, filename)
@@ -144,8 +153,8 @@ def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sub
         mklink(filepath, file_link, force)
 
 
-@task('install-all')
-def all(force=False):
+@task('install-all-osx')
+def osx_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
     emacs(force)
     bash(force)
@@ -154,7 +163,19 @@ def all(force=False):
     git(force)
     ipython(force)
     sublime(force)
-    fonts(force )
+    fonts('~/Library/Fonts', force)
+
+@task('install-all-linux')
+def linux_all(force=False):
+    """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
+    emacs(force)
+    bash(force)
+    hg(force)
+    git(force)
+    ipython(force)
+    fonts('~/.fonts', force)
+    xmodmap(force)
+    
 
 if __name__ == '__main__':
     all()
