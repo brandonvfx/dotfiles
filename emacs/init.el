@@ -121,3 +121,6 @@
        (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
      (flymake-mode))
        ))
+
+(load "~/.emacs.d/puppet-mode-init.el")
+(load "~/.emacs.d/puppet-mode.el")

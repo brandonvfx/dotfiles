@@ -1,2 +1,7 @@
 [
+    { "keys": ["ctrl+shift+a"], "command": "select_all" },
+    { "keys": ["alt+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+    { "keys": ["ctrl+g"], "command": "find_next" },
+    { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+    { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} }
 ]

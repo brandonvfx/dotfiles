@@ -2,12 +2,12 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export PS1="\u@\h:\W\> "
 
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/opt/mongo/bin:/usr/local/share/npm/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/opt/mongo/bin:/usr/local/share/npm/bin:/usr/local/rvm/bin:/usr/local/heroku/bin:$PATH" 
 
 export OS=`uname`
 
 if [ "$OS" == "Darwin" ] ; then
-    export EDITOR='mate'
+    export EDITOR='subl'
 else
     export EDITOR='emacs'
 fi

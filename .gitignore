@@ -7,3 +7,4 @@ ipython/profile_default/log*
 ipython/profile_default/pid*
 ipython/profile_default/security*
 emacs/ede-projects.el
+emacs/session.*
