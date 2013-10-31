@@ -60,7 +60,7 @@ hgrep() {
     fi 
 }
 
-if [ -x /usr/local/bin/hub ]
+if [ -x /usr/local/bin/hub ] || [ -x ~/bin/hub ]
 then
     alias git=hub
 fi

@@ -126,5 +126,8 @@
      (flymake-mode))
        ))
 
-
 (require 'go-mode)
+
+(load "~/.emacs.d/puppet-mode-init.el")
+(load "~/.emacs.d/puppet-mode.el")
+
