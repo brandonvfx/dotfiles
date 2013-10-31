@@ -3,6 +3,10 @@
 (setq-default tab-width 4)
 (column-number-mode)
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+
+(load "~/.emacs.d/go-mode.el")
+(add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
+
 (tool-bar-mode -1)
 
 ;; Shift the selected region right if distance is postive, left if
@@ -121,3 +125,6 @@
        (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
      (flymake-mode))
        ))
+
+
+(require 'go-mode)
