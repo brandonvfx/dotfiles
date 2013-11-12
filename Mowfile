@@ -18,16 +18,16 @@ def mklink(src, dest, force=False):
         elif os.path.isdir(dest):
             shutil.rmtree(dest)
         else:
-            os.unlink(dest)   
-    
+            os.unlink(dest)
+
     try:
         os.symlink(src, dest)
     except OSError, e:
         print "{0}: Already exists".format(dest)
         return
     print "Created link {0}".format(dest)
- 
-    
+
+
 def cp(src, dest, force=False):
     if os.path.exists(dest) and not force:
         print "{0}: Already exists".format(dest)
@@ -39,8 +39,8 @@ def cp(src, dest, force=False):
         elif os.path.isdir(dest):
             shutil.rmtree(dest)
         else:
-            os.unlink(dest)   
-    
+            os.unlink(dest)
+
     try:
         shutil.copy(src, dest)
     except OSError, e:
@@ -73,11 +73,13 @@ def bash(force=False):
     bashrc_link = os.path.expanduser('~/.inputrc')
     mklink(bashrc_file, bashrc_link, force)
 
+
 @task('install-keybindings')
 def xmodmap(force=False):
     xmodmap_file = os.path.join(ROOT, 'xmodmap')
     xmodmap_link = os.path.expanduser('~/.Xmodmap')
     mklink(xmodmap_file, xmodmap_link, force)
+
 
 @task('install-fonts')
 def fonts(font_dir='~/Library/Fonts', force=False):
@@ -165,6 +167,7 @@ def osx_all(force=False):
     sublime(force)
     fonts('~/Library/Fonts', force)
 
+
 @task('install-all-linux')
 def linux_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
@@ -176,7 +179,7 @@ def linux_all(force=False):
     fonts('~/.fonts', force)
     sublime(force, '~/.config/sublime-text-2/Packages/User')
     xmodmap(force)
-    
+
 
 if __name__ == '__main__':
     all()
