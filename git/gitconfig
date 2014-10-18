@@ -31,6 +31,8 @@
 	ci = commit -a
 	co = checkout
 	tags = tag -n1 -l
+	branchdate="!git for-each-ref --sort='-authordate' --format='authordate=\"%(authordate:relative)\";ref=%(refname:short)' refs/heads | while read entry; do eval $entry; desc=`git config branch.$ref.description`; if [ -n \"$desc\" ]; then desc=\"\t\t\t\t-- $desc\"; fi; echo \"$authordate\t$ref$desc\"; done"
+	branchedit="branch --edit-description"
 
 [color]
 	branch = auto
