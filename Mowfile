@@ -85,7 +85,7 @@ def xmodmap(force=False):
 def fonts(font_dir='~/Library/Fonts', force=False):
     font_install_location = os.path.expanduser(font_dir)
     try:
-        os.makedirs(font_dir)
+        os.makedirs(font_install_location)
     except OSError:
         pass
     for filepath in glob.glob(os.path.join(ROOT, 'ubuntu_mono_powerline', '*.otf')):
