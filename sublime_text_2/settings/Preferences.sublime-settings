@@ -1,17 +1,10 @@
 {
 	"auto_complete": false,
 	"close_windows_when_empty": false,
-<<<<<<< Updated upstream
-	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
-	"draw_white_space": "all",
-	"find_selected_text": true,
-	"flatland_sidebar_tree_small": true,
-=======
 	"color_scheme": "Packages/Theme - Flatland/Flatland Monokai.tmTheme",
 	"draw_white_space": "all",
 	"find_selected_text": true,
 	"flatland_sidebar_tree_xsmall": true,
->>>>>>> Stashed changes
 	"flatland_square_tabs": true,
 	"fold_buttons": false,
 	"font_face": "Ubuntu Mono",
@@ -19,27 +12,14 @@
 	[
 		"subpixel_antialias"
 	],
-<<<<<<< Updated upstream
-	"font_size": 20.0,
-	"highlight_line": true,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
-	"remember_open_files": false,
-=======
-	"font_size": 17.0,
+	"font_size": 19.0,
 	"highlight_line": true,
 	"ignored_packages":
 	[
 		"Vintage",
-		"E-Max",
-		"GoSublime",
-		"Theme - Flatland"
 	],
 	"remember_open_files": false,
 	"theme": "Flatland Dark.sublime-theme",
->>>>>>> Stashed changes
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true
