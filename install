@@ -1,0 +1,9 @@
+#!/bin/sh
+
+echo "Cloning Repo brandonvfx/dotfile"
+git clone git@github.com:brandonvfx/dotfiles.git ~/.dotfiles
+
+cd ~/.dotfiles
+
+echo "Running installer"
+./install.py

@@ -1,6 +1,3 @@
 [submodule "ubuntu_mono_powerline"]
 	path = ubuntu_mono_powerline
 	url = git://github.com/scotu/ubuntu-mono-powerline.git
-[submodule "powerline_shell"]
-	path = powerline_shell
-	url = git://github.com/milkbikis/powerline-shell.git

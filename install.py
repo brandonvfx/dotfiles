@@ -1,17 +1,20 @@
 #!/usr/bin/python
 import os
+import sys
 import glob
+import urllib
 import shutil
+import argparse
 
-from mow import task
 
-ROOT = os.path.dirname(__file__)
+ROOT = os.getcwd()
 
 def mklink(src, dest, force=False):
-    if os.path.exists(dest) and not force:
+    print src, dest, force, os.path.exists(dest)
+    if os.path.lexists(dest) and not force:
         print "{0}: Already exists".format(dest)
         return
-    elif os.path.exists(dest) and force:
+    elif os.path.lexists(dest) and force:
         print "Removing {0}".format(dest)
         if os.path.islink(dest):
             os.unlink(dest)
@@ -24,6 +27,7 @@ def mklink(src, dest, force=False):
         os.symlink(src, dest)
     except OSError, e:
         print "{0}: Already exists".format(dest)
+        print e
         return
     print "Created link {0}".format(dest)
 
@@ -49,7 +53,6 @@ def cp(src, dest, force=False):
     print "File Copied {0}".format(dest)
 
 
-@task('install-emacs')
 def emacs(force=False):
     """Install Emacs dot files"""
     emacs_dir = os.path.join(ROOT, 'emacs')
@@ -57,7 +60,6 @@ def emacs(force=False):
     mklink(emacs_dir, emacs_link, force)
 
 
-@task('install-bash')
 def bash(force=False):
     """Install Bash dot files"""
     bash_dir = os.path.join(ROOT, 'bash')
@@ -74,14 +76,12 @@ def bash(force=False):
     mklink(bashrc_file, bashrc_link, force)
 
 
-@task('install-keybindings')
 def xmodmap(force=False):
     xmodmap_file = os.path.join(ROOT, 'xmodmap')
     xmodmap_link = os.path.expanduser('~/.Xmodmap')
     mklink(xmodmap_file, xmodmap_link, force)
 
 
-@task('install-fonts')
 def fonts(font_dir='~/Library/Fonts', force=False):
     font_install_location = os.path.expanduser(font_dir)
     try:
@@ -94,7 +94,6 @@ def fonts(font_dir='~/Library/Fonts', force=False):
         cp(filepath, file_dest, force)
 
 
-@task('install-tcsh')
 def tcsh(force=False):
     """Install Tcsh dot files"""
     tcsh_dir = os.path.join(ROOT, 'tcsh')
@@ -103,7 +102,6 @@ def tcsh(force=False):
     mklink(tcsh_file, tcsh_link, force)
 
 
-@task('install-hg')
 def hg(force=False):
     """Install Mercurial dot files"""
     hg_dir = os.path.join(ROOT, 'hg')
@@ -116,7 +114,6 @@ def hg(force=False):
     mklink(hgignore_file, hgignore_link, force)
 
 
-@task('install-git')
 def git(force=False):
     """Install git dot files"""
     git_dir = os.path.join(ROOT, 'git')
@@ -129,7 +126,6 @@ def git(force=False):
     mklink(gitignore_file, gitignore_link, force)
 
 
-@task('install-ipython')
 def ipython(force=False):
     """Install IPython dot files"""
     ipython_dir = os.path.join(ROOT, 'ipython')
@@ -137,14 +133,12 @@ def ipython(force=False):
     mklink(ipython_dir, ipython_link, force)
 
 
-@task('install-iterm')
 def iterm(force=False):
     iterm_file = os.path.join(ROOT, 'iterm', 'com.googlecode.iterm2.plist')
     iterm_link = os.path.expanduser('~/Library/Preferences/com.googlecode.iterm2.plist')
     mklink(iterm_file, iterm_link, force)
 
 
-@task('install-sublime-text-2')
 def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sublime Text 2/Packages/User'):
     """Install Sublime settings"""
     install_location = os.path.expanduser(sublime_settings_dir)
@@ -155,7 +149,21 @@ def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sub
         mklink(filepath, file_link, force)
 
 
-@task('install-all-osx')
+def goprompt(force=False):
+    goprompt_file = os.path.join(ROOT, 'goprompt')
+    goprompt_link = os.path.expanduser('~/.goprompt')
+    mklink(goprompt_file, goprompt_link, force)
+
+    bin_install = os.path.expanduser('~/bin/go-prompt')
+    try:
+        os.makedirs(os.path.expanduser('~/bin/'))
+    except OSError:
+        pass
+    open(bin_install, 'w').close()
+    urllib.urlretrieve('https://github.com/brandonvfx/go-prompt/releases/download/v0.1.1/go-prompt_linux_amd64.tar.gz', bin_install)
+    os.chmod(bin_install, 0755)
+
+
 def osx_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
     emacs(force)
@@ -166,9 +174,9 @@ def osx_all(force=False):
     ipython(force)
     sublime(force)
     fonts('~/Library/Fonts', force)
+    goprompt(force)
 
 
-@task('install-all-linux')
 def linux_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
     emacs(force)
@@ -179,7 +187,21 @@ def linux_all(force=False):
     fonts('~/.fonts', force)
     sublime(force, '~/.config/sublime-text-2/Packages/User')
     xmodmap(force)
+    goprompt(force)
 
 
 if __name__ == '__main__':
-    all()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--force', help='Install over existing files.', action='store_true', default=False)
+    args = parser.parse_args()
+
+    platform = sys.platform
+
+    if platform.startswith('darwin'):
+        osx_all(args.force)
+    elif platform.startswith('linux'):
+        print platform, 'install. Force? ', args.force
+        linux_all(args.force)
+
+    else:
+        print 'Unsupported OS: {}'.format(platform)
