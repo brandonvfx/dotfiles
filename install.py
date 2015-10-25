@@ -150,8 +150,8 @@ def sublime(force=False, sublime_settings_dir='~/Library/Application Support/Sub
 
 
 def goprompt(force=False):
-    goprompt_file = os.path.join(ROOT, 'goprompt')
-    goprompt_link = os.path.expanduser('~/.goprompt')
+    goprompt_file = os.path.join(ROOT, 'go_prompt')
+    goprompt_link = os.path.expanduser('~/.go_prompt')
     mklink(goprompt_file, goprompt_link, force)
 
     bin_install = os.path.expanduser('~/bin/go-prompt')
@@ -162,6 +162,16 @@ def goprompt(force=False):
     open(bin_install, 'w').close()
     urllib.urlretrieve('https://github.com/brandonvfx/go-prompt/releases/download/v0.1.1/go-prompt_linux_amd64.tar.gz', bin_install)
     os.chmod(bin_install, 0755)
+
+
+def atom(force=False):
+    """Install atom config files"""
+    install_location = os.path.expanduser('~/.atom')
+    atom_settings = os.path.join(ROOT, 'atom')
+    for filepath in glob.glob(os.path.join(atom_settings, '*')):
+        filename = os.path.basename(filepath)
+        file_link = os.path.join(install_location, filename)
+        mklink(filepath, file_link, force)
 
 
 def osx_all(force=False):
@@ -175,6 +185,7 @@ def osx_all(force=False):
     sublime(force)
     fonts('~/Library/Fonts', force)
     goprompt(force)
+    atom(force)
 
 
 def linux_all(force=False):
@@ -188,7 +199,7 @@ def linux_all(force=False):
     sublime(force, '~/.config/sublime-text-2/Packages/User')
     xmodmap(force)
     goprompt(force)
-
+    atom(force)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

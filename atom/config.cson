@@ -1,0 +1,67 @@
+"*":
+  "exception-reporting":
+    userId: "1a320ed4-d108-9e52-1c22-d7f70eac7f64"
+  "release-notes":
+    viewedVersion: "0.95.0"
+  welcome:
+    showOnStartup: false
+  metrics:
+    userId: "4ce141e918f0c61b3dde57dec92babf85b54c01e"
+  editor:
+    showIndentGuide: true
+    preferredLineLength: 100
+    showInvisibles: true
+    tabLength: 4
+    invisibles: {}
+    fontSize: 15
+  core:
+    themes: [
+      "flatland-dark-ui"
+      "atom-dark-syntax"
+    ]
+    ignoredNames: [
+      ".git"
+      ".svn"
+      ".DS_Store"
+      "*.pyc"
+    ]
+    disabledPackages: [
+      "background-tips"
+      "autocomplete-plus"
+      "linter-pylint"
+      "linter-pep8"
+    ]
+  "tree-view":
+    hideIgnoredNames: true
+  "spell-check":
+    grammars: [
+      "source.gfm"
+      "text.git-commit"
+      "text.plain"
+    ]
+  "find-and-replace":
+    openProjectFindResultsInRightPane: true
+  "autocomplete-plus":
+    liveCompletion: false
+  autocomplete: {}
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
+  "go-plus":
+    lintOnSave: false
+  linter: {}
+  "linter-pep8":
+    maxLineLength: 100
+  "autocomplete-python": {}
+  "markdown-themeable-pdf": {}
+  "markdown-pdf": {}
+  "markdown-preview":
+    useGitHubStyle: true
+".gohtml.html.text":
+  editor:
+    preferredLineLength: 100
+".go.source":
+  editor:
+    preferredLineLength: 100
+".gotemplate.source":
+  editor:
+    preferredLineLength: 100

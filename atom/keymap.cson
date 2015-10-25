@@ -1,0 +1,52 @@
+# Your keymap
+#
+# Atom keymaps work similarly to stylesheets. Just as stylesheets use selectors
+# to apply styles to elements, Atom keymaps use selectors to associate
+# keystrokes with events in specific contexts.
+#
+# You can create a new keybinding in this file by typing "key" and then hitting
+# tab.
+#
+# Here's an example taken from Atom's built-in keymap:
+#
+# '.editor':
+#   'enter': 'editor:newline'
+#
+# 'body':
+#   'ctrl-P': 'core:move-up'
+#   'ctrl-p': 'core:move-down'
+#
+
+'body':
+  'ctrl-g': 'core:cancel'
+
+'.editor':
+  'ctrl-left': 'editor:move-to-beginning-of-word'
+  'ctrl-right': 'editor:move-to-end-of-word'
+  'ctrl-shift-left': 'editor:select-to-beginning-of-word'
+  'ctrl-shift-right': 'editor:select-to-end-of-word'
+  'ctrl-x ctrl-s': 'core:save'
+  'ctrl-g': 'core:cancel'
+
+'.go-to-line .mini.editor input':
+  'ctrl-g': 'core:cancel'
+
+'.tree-view-dialog .mini.editor':
+  'ctrl-g': 'core:cancel'
+
+'.tool-panel.panel-left, .tool-panel.panel-right':
+  'ctrl-g': 'tool-panel:unfocus'
+
+'.platform-win32':
+  'alt-g g': 'go-to-line:toggle'
+  'ctrl-g': 'core:cancel'
+
+'.platform-win32 .go-to-line .mini.editor input':
+  'ctrl-g': 'core:cancel'
+
+'.platform-darwin':
+  'alt-g g': 'go-to-line:toggle'
+  'ctrl-g': 'core:cancel'
+
+'.platform-darwin .go-to-line .mini.editor input':
+  'ctrl-g': 'core:cancel'
