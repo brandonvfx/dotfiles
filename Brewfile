@@ -1,51 +1,67 @@
-update
-#tap 'phinze/cask'
+brew 'caskroom/cask/brew-cask'
 
-#install brew-cask
+brew 'jpeg'
+brew 'libtiff'
+brew 'openexr'
+brew 'libpng'
+brew 'webp'
+brew 'go'
+brew 'ffmpeg'
+brew 'jq'
+brew 'tree'
+brew 'tmux'
+brew 'wget'
+brew 'heroku-toolbelt'
+brew 'emacs', args: ['use-git-head', 'cocoa', 'srgb']
+brew 'imagemagick', args: ['with-libtiff', 'with-openexr', 'with-webp']
+brew 'spark'
+brew 'mercurial'
+brew 'hub'
+brew 'bash-completion'
+brew 'docker'
+brew 'docker-compose'
+brew 'docker-machine'
+brew 'docker-swarm'
+brew 'md5sha1sum'
+brew 'bash-completion'
+brew 'spark'
+brew 'siege'
+brew 'hub'
+brew 'node'
 
-install jpeg
-install libtiff
-install openexr
-install libpng
-install webp
-install go
-install ffmpeg
-install jq
-install tree
-install tmux
-install wget
-install heroku-toolbelt
-install emacs --use-git-head --cocoa --srgb
-install imagemagick --with-libtiff --with-openexr --with-webp
-install spark
-install mercurial
-install hub
-install bash-completion
 
-cask install google-chrome
-cask install alfred
-cask install dropbox
-cask install moom
-cask install iterm2
-cask install f-lux
-cask install geektool
-cask install virtualbox
-cask install vagrant
-cask install evernote
-cask install firefox
-cask install sublime-text
-cask install hipchat
-cask install limechat
-cask install skitch
-cask install flash
-cask install google-hangouts
-cask install silverlight
-cask install firefox
-cask install evernote
-cask install gpgtools
-cask install dash
-cask install kindle
-cask install steam
-cask install lastpass-universal
+tap 'homebrew/completions'
+# brew 'docker-completion'
+brew 'docker-machine-completion'
+brew 'packer-completion'
+brew 'brew-cask-completion'
 
-cleanup
+cask 'google-chrome'
+cask 'alfred'
+cask 'dropbox'
+cask 'moom'
+cask 'iterm2'
+cask 'flux'
+cask 'geektool'
+cask 'virtualbox'
+cask 'evernote'
+cask 'firefox'
+cask 'sublime-text'
+cask 'hipchat'
+cask 'limechat'
+cask 'skitch'
+cask 'google-hangouts'
+cask 'silverlight'
+cask 'firefox'
+cask 'evernote'
+cask 'gpgtools'
+cask 'kindle'
+cask 'steam'
+cask 'lastpass'
+# cask 'xquartz'
+cask 'playonmac'
+cask 'battle-net'
+cask 'adobe-creative-cloud'
+cask 'atom'
+cask 'packer'
+cask 'postgres'
