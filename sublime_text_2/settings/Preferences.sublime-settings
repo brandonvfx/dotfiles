@@ -1,26 +1,13 @@
 {
-	"auto_complete": false,
-	"close_windows_when_empty": false,
-	"color_scheme": "Packages/Theme - Flatland/Flatland Monokai.tmTheme",
-	"draw_white_space": "all",
-	"find_selected_text": true,
-	"flatland_sidebar_tree_xsmall": true,
-	"flatland_square_tabs": true,
-	"fold_buttons": false,
-	"font_face": "Ubuntu Mono",
-	"font_options":
-	[
-		"subpixel_antialias"
-	],
-	"font_size": 19.0,
-	"highlight_line": true,
+	"font_size": 15.0,
 	"ignored_packages":
 	[
-		"Vintage"
-	],
-	"remember_open_files": false,
-	"theme": "Flatland Dark.sublime-theme",
-	"translate_tabs_to_spaces": true,
-	"trim_automatic_white_space": true,
-	"trim_trailing_white_space_on_save": true
+		"Vintage",
+		"remember_open_files": false,
+		"theme": "Flatland Dark.sublime-theme",
+		"translate_tabs_to_spaces": true,
+		"trim_automatic_white_space": true,
+		"trim_trailing_white_space_on_save": true
+
+	]
 }
