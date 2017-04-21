@@ -14,7 +14,7 @@ alias grep='grep --color=auto '
 
 # editors
 function e()
-{ 
+{
     if [ "$OS" == "Darwin" ] ; then
         command open -a /Applications/Emacs.app "$@" --args "--debug-init --nw"
         #command emacs -nw "$@"
@@ -25,7 +25,7 @@ function e()
 }
 
 #alias e=emacs
-alias m=mate
+# alias m=mate
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -57,10 +57,24 @@ hgrep() {
         history | grep $1
     else
         echo "!! Need name to grep for"
-    fi 
+    fi
 }
 
 if [ -x /usr/local/bin/hub ] || [ -x ~/bin/hub ]
 then
     alias git=hub
 fi
+
+code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+# docker
+alias compose='docker-compose'
+alias dc='docker-compose'
+alias dcu='docker-compose up'
+alias dcr='docker-compose run'
+alias dcb='docker-compose build'
+# alias machine='docker-machine'
+# alias m='docker-machine'
+# machine-set () { eval "$(docker-machine env $*)" ;}
+alias dock='docker'
+alias d='docker'
