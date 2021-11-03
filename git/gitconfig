@@ -6,7 +6,7 @@
 	user = brandonvfx
 
 [core]
-	editor = emacs
+	editor = vi
 
 
 [difftool "Kaleidoscope"]

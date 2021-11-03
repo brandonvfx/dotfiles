@@ -174,18 +174,29 @@ def atom(force=False):
         mklink(filepath, file_link, force)
 
 
+def zsh(force=False):
+    """Install ZSH dot files"""
+    
+    tcsh_dir = os.path.join(ROOT, 'zsh')
+    tcsh_file = os.path.join(tcsh_dir, 'zshrc')
+    tcsh_link = os.path.expanduser('~/.zshrc')
+    mklink(tcsh_file, tcsh_link, force)
+
+
+
 def osx_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
-    emacs(force)
+    # emacs(force)
     bash(force)
-    tcsh(force)
-    hg(force)
+    zsh(force)
+    # tcsh(force)
+    # hg(force)
     git(force)
     ipython(force)
-    sublime(force)
+    # sublime(force)
     fonts('~/Library/Fonts', force)
-    goprompt(force)
-    atom(force)
+    # goprompt(force)
+    # atom(force)
 
 
 def linux_all(force=False):

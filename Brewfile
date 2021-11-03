@@ -1,4 +1,4 @@
-brew 'caskroom/cask/brew-cask'
+#brew 'caskroom/cask/brew-cask'
 
 brew 'jq'
 brew 'tree'
@@ -14,9 +14,11 @@ brew 'pyenv-virtualenv'
 brew 'pipenv'
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
-brew 'zsh-completions'
+brew 'zsh-syntax-highlighting'
 brew 'go'
 brew 'gnupg'
+brew 'git'
+brew 'p4v'
 
 cask 'iterm2'
 cask 'docker'
