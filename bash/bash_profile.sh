@@ -34,3 +34,4 @@ function _update_ps1() {
 
 export PROMPT_COMMAND="_update_ps1"
 
+. "$HOME/.cargo/env"

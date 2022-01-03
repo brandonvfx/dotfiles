@@ -1,21 +1,22 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import os
 import sys
 import glob
 import urllib
 import shutil
 import argparse
+import subprocess
 
 
 ROOT = os.getcwd()
 
 def mklink(src, dest, force=False):
-    print src, dest, force, os.path.exists(dest)
+    print(src, dest, force, os.path.exists(dest))
     if os.path.lexists(dest) and not force:
-        print "{0}: Already exists".format(dest)
+        print("{0}: Already exists".format(dest))
         return
     elif os.path.lexists(dest) and force:
-        print "Removing {0}".format(dest)
+        print("Removing {0}".format(dest))
         if os.path.islink(dest):
             os.unlink(dest)
         elif os.path.isdir(dest):
@@ -25,19 +26,19 @@ def mklink(src, dest, force=False):
 
     try:
         os.symlink(src, dest)
-    except OSError, e:
-        print "{0}: Already exists".format(dest)
-        print e
+    except OSError as e:
+        print("{0}: Already exists".format(dest))
+        print(e)
         return
-    print "Created link {0}".format(dest)
+    print("Created link {0}".format(dest))
 
 
 def cp(src, dest, force=False):
     if os.path.exists(dest) and not force:
-        print "{0}: Already exists".format(dest)
+        print("{0}: Already exists".format(dest))
         return
     elif os.path.exists(dest) and force:
-        print "Removing {0}".format(dest)
+        print("Removing {0}".format(dest))
         if os.path.islink(dest):
             os.unlink(dest)
         elif os.path.isdir(dest):
@@ -47,10 +48,10 @@ def cp(src, dest, force=False):
 
     try:
         shutil.copy(src, dest)
-    except OSError, e:
-        print "{0}: Already exists".format(dest)
+    except OSError as e:
+        print("{0}: Already exists".format(dest))
         return
-    print "File Copied {0}".format(dest)
+    print("File Copied {0}".format(dest))
 
 
 def emacs(force=False):
@@ -101,18 +102,28 @@ def tcsh(force=False):
     tcsh_link = os.path.expanduser('~/.tcshrc')
     mklink(tcsh_file, tcsh_link, force)
 
+def zsh(force=False):
+    """Install ZSH dot files"""
+    zsh_dir = os.path.join(ROOT, 'zsh')
+    zsh_file = os.path.join(zsh_dir, 'zshrc')
+    zsh_link = os.path.expanduser('~/.zhrc')
+    mklink(zsh_file, zsh_link, force)
 
-def hg(force=False):
-    """Install Mercurial dot files"""
-    hg_dir = os.path.join(ROOT, 'hg')
-    hgrc_file = os.path.join(hg_dir, 'hgrc')
-    hgrc_link = os.path.expanduser('~/.hgrc')
-    mklink(hgrc_file, hgrc_link, force)
+    if not os.path.exists(os.path.expanduser("~/.oh-my-zsh")):
+        print("Run 'git clone http://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh' ")
+        subprocess.run("git clone http://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh", shell=True, check=True)
 
-    hgignore_file = os.path.join(hg_dir, 'hgignore')
-    hgignore_link = os.path.expanduser('~/.hgignore')
-    mklink(hgignore_file, hgignore_link, force)
+    if not os.path.exists(os.path.expanduser("${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k")):
+        print("Run 'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k'")
+        subprocess.run("git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k", shell=True, check=True)
 
+    oh_zsh_file = os.path.join(zsh_dir, 'oh-my-zsh.sh')
+    oh_zsh_link = os.path.expanduser('~/.oh-my-zsh/oh-my-zsh.sh')
+    mklink(oh_zsh_file, oh_zsh_link, force)
+
+    p10k_file = os.path.join(zsh_dir, "p10k", 'p10k-instant-prompt-ashworb.zsh')
+    p10k_link = os.path.expanduser('~/.p10k.zsh')
+    mklink(oh_zsh_file, oh_zsh_link, force)
 
 def git(force=False):
     """Install git dot files"""
@@ -161,45 +172,31 @@ def goprompt(force=False):
         pass
     open(bin_install, 'w').close()
     urllib.urlretrieve('https://github.com/brandonvfx/go-prompt/releases/download/v0.1.1/go-prompt_linux_amd64.tar.gz', bin_install)
-    os.chmod(bin_install, 0755)
-
-
-def atom(force=False):
-    """Install atom config files"""
-    install_location = os.path.expanduser('~/.atom')
-    atom_settings = os.path.join(ROOT, 'atom')
-    for filepath in glob.glob(os.path.join(atom_settings, '*')):
-        filename = os.path.basename(filepath)
-        file_link = os.path.join(install_location, filename)
-        mklink(filepath, file_link, force)
+    os.chmod(bin_install, 0o755)
 
 
 def osx_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
     emacs(force)
     bash(force)
-    tcsh(force)
-    hg(force)
+    # tcsh(force)
+    zsh(force)
     git(force)
     ipython(force)
-    sublime(force)
     fonts('~/Library/Fonts', force)
-    goprompt(force)
-    atom(force)
+    # goprompt(force)
 
 
 def linux_all(force=False):
     """Install Emacs, Bash, Tcsh, Mercurial, git, IPython dot files"""
     emacs(force)
     bash(force)
-    hg(force)
+    zsh(force)
     git(force)
     ipython(force)
     fonts('~/.fonts', force)
-    sublime(force, '~/.config/sublime-text-2/Packages/User')
     xmodmap(force)
-    goprompt(force)
-    atom(force)
+    # goprompt(force)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -211,8 +208,8 @@ if __name__ == '__main__':
     if platform.startswith('darwin'):
         osx_all(args.force)
     elif platform.startswith('linux'):
-        print platform, 'install. Force? ', args.force
+        print(platform, 'install. Force? ', args.force)
         linux_all(args.force)
 
     else:
-        print 'Unsupported OS: {}'.format(platform)
+        print('Unsupported OS: {}'.format(platform))
